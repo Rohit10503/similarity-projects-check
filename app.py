@@ -21,6 +21,13 @@ sentences = df['combined'].tolist()
 # Convert the list of sentences to embeddings
 sentence_embeddings = model.encode(sentences)
 
+
+@app.route("/")
+def hello_world():
+    return "<p>Hello, World!</p>"
+
+
+
 @app.route('/similarity', methods=['POST'])
 def get_similarity():
     # Get the input sentence from the POST request
