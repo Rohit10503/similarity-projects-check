@@ -1,0 +1,49 @@
+.upper{
+    /* background-color: rgb(229, 238, 247); */
+    display: flex;
+    justify-content: space-evenly;
+    
+}
+.upper-left{
+    width: 40%;
+    text-align: center;
+    background-color: aliceblue;
+}
+
+.upper-right{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 50%;
+    text-align: center;
+    align-items: center;
+}
+.pro_img img{
+    height: 10em;
+
+}
+
+.button_field{
+    display: flex;
+    justify-content: center;
+}
+
+.middle{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+@media screen and (max-width: 480px) {
+    .upper{
+        flex-direction: column;
+    }
+    .upper-left{
+        width: 100%;
+    }
+    .upper-right{
+        width: 100%;
+    }
+  }

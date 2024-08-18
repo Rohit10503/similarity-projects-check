@@ -1,0 +1,22 @@
+.signup-box{
+    
+    /* margin :1em;
+    padding: 2em; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.signup-box form {
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+width: 40%;
+/* gap: 1em; */
+}
+
+@media screen and (max-width: 480px) {
+    .signup-box form{
+        width: 100%;
+    }
+  }

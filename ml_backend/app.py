@@ -16,7 +16,7 @@ df = pd.read_csv('paper_abstracts.csv')
 df['combined'] = df['id'].astype(str) + ' ' + df['abstract'].astype(str)
 
 # Convert the combined column to a list
-sentences = df['combined'].tolist()
+sentences = df['combined'].tolist()[:100]
 
 # Convert the list of sentences to embeddings
 sentence_embeddings = model.encode(sentences)
@@ -60,3 +60,4 @@ def get_similarity():
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=5000)
+  

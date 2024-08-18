@@ -1,0 +1,23 @@
+.login-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+
+}
+.login-box .form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 40%;     
+}
+@media screen and (max-width: 480px) {
+    .login-box form{
+        width: 100%;
+    }
+  }
+
+
+  
