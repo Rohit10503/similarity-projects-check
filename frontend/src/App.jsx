@@ -5,17 +5,28 @@ import Home from './pages/home'
 import SignUp from './pages/signup'
 import Navbar from './component/navbar'
 import Login from './pages/login'
+import CreateGroup from './pages/crreate_group'
+import GroupProject from './pages/groups_prj'
+import PrivateComponent from './Services/privateComponents'
 
 function App() {
 
 
   return (
     <>
-    <Navbar/> 
     <BrowserRouter>
+    <Navbar/> 
     <Routes>
-      <Route path="/signup" element={<SignUp/>}/>
+      
+      <Route element={<PrivateComponent />}>
       <Route path="/" element={<Home/>}/>
+      <Route path="/create_group" element={<CreateGroup/>}/>
+      <Route path="/view_groups" element={<GroupProject/>}/>
+
+      </Route>
+
+
+      <Route path="/signup" element={<SignUp/>}/>
       <Route path='/login' element={<Login/>}/>
       
     </Routes>

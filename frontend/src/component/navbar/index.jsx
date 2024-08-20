@@ -1,82 +1,105 @@
 import React from "react";
-import "./navbar.css"
+import { Link, useNavigate } from "react-router-dom";
+import "./navbar.css";
+
 const Navbar = () => {
-    return <>
-        <nav class="navbar" role="navigation" aria-label="main navigation">
-            <div class="navbar-brand">
-                <a class="navbar-item" href="https://bulma.io">
-                    <img className="svg" width={60}  src="https://img.freepik.com/free-vector/creative-gradient-code-logo_23-2148820572.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1723766400&semt=ais_hybrid" alt="Logo" />
+    const auth = sessionStorage.getItem("user");
+    const navigate = useNavigate();
 
-                </a>
+    const logout = () => {
+        sessionStorage.clear();
+        navigate("/login");
+    };
 
-                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+    return (
+        <nav className="navbar" role="navigation" aria-label="main navigation">
+            <div className="navbar-brand">
+                <Link to="/" className="navbar-item">
+                    <img
+                        className="svg"
+                        width={60}
+                        src="https://img.freepik.com/free-vector/creative-gradient-code-logo_23-2148820572.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1723766400&semt=ais_hybrid"
+                        alt="Logo"
+                    />
+                </Link>
+
+                <button
+                    className="navbar-burger"
+                    aria-label="menu"
+                    aria-expanded="false"
+                    data-target="navbarBasicExample"
+                    onClick={() => {
+                        const target = document.getElementById('navbarBasicExample');
+                        if (target) {
+                            target.classList.toggle('is-active');
+                        }
+                    }}
+                >
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </a>
+                </button>
             </div>
 
-            <div id="navbarBasicExample" class="">
-                <div class="navbar-start">
-                    <a class="navbar-item" href="/">
-                        Home
-                    </a>
+            <div id="navbarBasicExample" className="navbar-menu">
+                <div className="navbar-start">
+                    {
+                        auth && (
+                            <Link to="/" className="navbar-item">
+                                Home
+                            </Link>
+                        )
+                    }
 
 
-                   
-                    <a class="navbar-item" href="#">
+                    <Link to="#" className="navbar-item">
                         Documentation
-                    </a>
+                    </Link>
 
-                    <div class="navbar-item">
-                        <div class="buttons">
-                            <a class="button is-primary" href="/signup">
-                                <strong>Sign up</strong>
-                            </a>
-                            <a class="button is-light"  href="/login">
-                                Log in
-                            </a>
+                    {!auth ? (
+                        <div className="navbar-item">
+                            <div className="buttons">
+                                <Link to="/signup" className="button is-primary">
+                                    <strong>Sign up</strong>
+                                </Link>
+                                <Link to="/login" className="button is-light">
+                                    Log in
+                                </Link>
+                            </div>
                         </div>
+                    ) : (
+                        <div className="navbar-item">
+                            <div className="buttons">
+                                <button className="button is-light" onClick={logout}>
+                                    Log out
+                                </button>
+                            </div>
+                        </div>
+                    )}
+                </div>
+
+                {/* Optional Dropdown */}
+                {/* <div className="navbar-item has-dropdown is-hoverable">
+                    <a className="navbar-link">More</a>
+                    <div className="navbar-dropdown">
+                        <Link to="/about" className="navbar-item">
+                            About
+                        </Link>
+                        <Link to="/jobs" className="navbar-item is-selected">
+                            Jobs
+                        </Link>
+                        <Link to="/contact" className="navbar-item">
+                            Contact
+                        </Link>
+                        <hr className="navbar-divider"/>
+                        <Link to="/report-issue" className="navbar-item">
+                            Report an issue
+                        </Link>
                     </div>
-{/* 
-                    <div class="navbar-item has-dropdown is-hoverable">
-                        <a class="navbar-link">
-                            More
-                        </a>
-
-                        <div class="navbar-dropdown">
-                            <a class="navbar-item">
-                                About
-                            </a>
-                            <a class="navbar-item is-selected">
-                                Jobs
-                            </a>
-                            <a class="navbar-item">
-                                Contact
-                            </a>
-                            <hr class="navbar-divider"/>
-                                <a class="navbar-item">
-                                    Report an issue
-                                </a>
-                        </div>
-                    </div> */}
-                </div>
-
-                <div class="navbar-end">
-                    {/* <div class="navbar-item">
-                        <div class="buttons">
-                            <a class="button is-primary" href="/signup">
-                                <strong>Sign up</strong>
-                            </a>
-                            <a class="button is-light"  href="/login">
-                                Log in
-                            </a>
-                        </div>
-                    </div> */}
-                </div>
+                </div> */}
             </div>
         </nav>
-    </>
-}
+    );
+};
+
 export default Navbar;

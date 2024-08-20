@@ -38,7 +38,7 @@ const Login = () => {
     <div className="login-box">
       <div className="form">
         <div class="field">
-          <label class="label">UIN Number</label>
+          <label class="label">UIN Number</label> 
           <div class="control">
             <input class="input" type="text" placeholder="Enter 211P***" value={user.uin} onChange={(e) => setUser({ ...user, uin: e.target.value })} />
           </div>

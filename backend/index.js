@@ -48,25 +48,25 @@ app.post("/login", async (req, res) => {
 })
 
 
-app.post("/create_group", async (req, res) => {         //user_id  grp_name  grp_pass 
-    if (req.body.grp_name && req.body.grp_pass) {
+app.post("/create_group", async (req, res) => {         //user_id  grp_name  grp_pass grp_mem[0]
+    if (req.body.grp_name && req.body.grp_pass ) {
         let new_grp = new Group(req.body);
         let result = await new_grp.save();
         if (result) {
-            if (result) {
+            
 
                 let update_user_profile = await User.updateOne({
-                    _id: res.body.user_id
+                    _id: req.body.user_id
                 }
                     , {
-                        $set: { grpid: res.body._id }
+                        $set: { grpid: result._id }
                     })
 
                 if (update_user_profile) {
 
                     res.send({ "result": "Success" })
                 }
-            }
+            
 
         }
     }
@@ -111,5 +111,15 @@ app.post("/join_group", async (req, res) => {           //grp_id   grp_pass  nam
 })
 
 
+app.get("/disp_prj",async(req,res)=>{
+    let projects= await Group.find()
+    if (projects.length>0){
+        res.send(projects)
+    }
+    else{
+        res.send({"result":"none"})
+    }
+
+});
 
 app.listen(3500);

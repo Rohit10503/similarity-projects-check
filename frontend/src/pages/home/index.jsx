@@ -5,7 +5,14 @@ const Home=()=>{
     const auth=JSON.parse(sessionStorage.getItem("user"))
     const navigate=useNavigate()
 
+    
 
+    const goToCreateGroup=()=>{
+        navigate("/create_group")
+    }
+    const goToViewGroup=()=>{
+        navigate("/view_groups")
+    }
     return<>
 
     <div className="box">
@@ -28,8 +35,8 @@ const Home=()=>{
                 </div>
 
                 <div className="buttons button_field">
-                <button class="button is-warning  ">Create group</button>
-                <button class="button is-warning">View & join group</button>
+                <button class="button is-warning  " onClick={goToCreateGroup}>Create group</button>
+                <button class="button is-warning" onClick={goToViewGroup}>View & join group</button>
                 </div>
             </div>
             <div className="upper-right "> 
@@ -40,7 +47,7 @@ const Home=()=>{
         </div>
         <div className="middle box">
         <textarea class="textarea" placeholder="e.g. Give your project idea here"></textarea>
-        <div ><button class="button is-warning  ">Create group</button></div>
+        <div ><button class="button is-warning  ">Click here</button></div>
 
         </div>
         <div className="lower"></div>

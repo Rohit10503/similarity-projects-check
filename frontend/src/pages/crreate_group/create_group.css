@@ -1,0 +1,10 @@
+.create-main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.create-main .group_field{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
