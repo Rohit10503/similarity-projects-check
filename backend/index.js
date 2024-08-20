@@ -123,3 +123,6 @@ app.get("/disp_prj",async(req,res)=>{
 });
 
 app.listen(3500);
+
+
+// mongodb+srv://rohitpandey10503:Rohit1234@cluster0.oknc0ab.mongodb.net/Similarity_prj?retryWrites=true&w=majority&appName=Cluster0
