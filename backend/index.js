@@ -122,6 +122,13 @@ app.get("/disp_prj",async(req,res)=>{
 
 });
 
+
+app.post("/disp_single",async(req,res)=>{
+    let user_grpid=req.body.grp_id
+    let result= await Group.find({"_id":user_grpid})
+    res.send(result)
+});
+
 app.listen(3500);
 
 

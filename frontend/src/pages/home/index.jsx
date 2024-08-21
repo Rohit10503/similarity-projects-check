@@ -7,9 +7,11 @@ const Home=()=>{
 
     
 
-    const goToCreateGroup=()=>{
-        navigate("/create_group")
+    const goToMangeSelf=()=>{
+
+        navigate("/self_group")
     }
+
     const goToViewGroup=()=>{
         navigate("/view_groups")
     }
@@ -35,7 +37,7 @@ const Home=()=>{
                 </div>
 
                 <div className="buttons button_field">
-                <button class="button is-warning  " onClick={goToCreateGroup}>Create group</button>
+                <button class="button is-warning  " onClick={goToMangeSelf}>Manage My Groups</button>
                 <button class="button is-warning" onClick={goToViewGroup}>View & join group</button>
                 </div>
             </div>

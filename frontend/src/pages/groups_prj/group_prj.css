@@ -1,10 +1,27 @@
+.main_view{
+    overflow: scroll;
+    padding: 1em 0em;
+}
 table{
     width: 100%;
     border: 1px solid green;
+    padding: 1em;
+    text-align: center;
+    
+}
+th{
+    text-align: center;
+    border-bottom: 1px solid grey;
 }
 td{
-    padding: 1em;
+    padding: 2em;
+    border-right: 1px solid gray;
 }
+tbody{
+    padding: 10em;
+}
+
+
 .modal{
     display: block;
 }

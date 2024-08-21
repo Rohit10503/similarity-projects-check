@@ -8,6 +8,7 @@ import Login from './pages/login'
 import CreateGroup from './pages/crreate_group'
 import GroupProject from './pages/groups_prj'
 import PrivateComponent from './Services/privateComponents'
+import SelfGroup from './pages/self_group'
 
 function App() {
 
@@ -22,7 +23,7 @@ function App() {
       <Route path="/" element={<Home/>}/>
       <Route path="/create_group" element={<CreateGroup/>}/>
       <Route path="/view_groups" element={<GroupProject/>}/>
-
+      <Route path='/self_group' element={<SelfGroup/>}/>
       </Route>
 
 
