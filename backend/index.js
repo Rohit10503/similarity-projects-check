@@ -129,6 +129,12 @@ app.post("/disp_single",async(req,res)=>{
     res.send(result)
 });
 
+
+
+
+
+
+
 app.listen(3500);
 
 

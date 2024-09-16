@@ -9,6 +9,7 @@ import CreateGroup from './pages/crreate_group'
 import GroupProject from './pages/groups_prj'
 import PrivateComponent from './Services/privateComponents'
 import SelfGroup from './pages/self_group'
+import Footer from './component/footer'
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
       <Route path='/login' element={<Login/>}/>
       
     </Routes>
+    <Footer/>
     </BrowserRouter>
       
     </>

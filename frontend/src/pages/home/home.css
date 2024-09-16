@@ -35,6 +35,9 @@
     align-items: center;
     gap: 1em;
 }
+/* .MuiTabs-flexContainer{
+    overflow: scroll;
+} */
 
 @media screen and (max-width: 480px) {
     .upper{
@@ -45,5 +48,8 @@
     }
     .upper-right{
         width: 100%;
+    }
+    .MuiTabs-flexContainer{
+        overflow: scroll;
     }
   }
