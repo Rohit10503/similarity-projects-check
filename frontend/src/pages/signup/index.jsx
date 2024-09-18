@@ -52,8 +52,8 @@ const SignUp = () => {
             <div className="form">
                 <div class="field">
                     <label class="label">Name</label>
-                    <div class="control">
-                        <input class="input" type="text" placeholder="Enter your Name" value={user.name} onChange={(e) => setUser({ ...user, name: e.target.value })}/>
+                    <div class="control has-icons-left has-icons-right">
+                        <input class="input is-success" type="text" placeholder="Enter your Name" value={user.name} onChange={(e) => setUser({ ...user, name: e.target.value })}/>
                     </div>
                 </div>
 

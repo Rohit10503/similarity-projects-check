@@ -133,10 +133,10 @@ const Home = () => {
                                 prjRes.map((item, index) => (
                                     <Tab
                                     key={index}
-                                    label={item.score.toFixed(2)}
-                                    {...a11yProps(index)}
+                                    label={`${(item.score*100).toFixed(2) } %`}
+                                    {...a11yProps(index)} 
                                 />
-                                ))}
+                                ))} 
                             
                         </Tabs>
                     </Box>
