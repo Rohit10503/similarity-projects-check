@@ -4,6 +4,15 @@ import "./group_prj.css"
 import { useNavigate } from "react-router-dom";
 const GroupProject = () => {
 
+    const [clickable, setClickable] = useState(true);
+    
+    useEffect(() => {
+        const auth = JSON.parse(sessionStorage.getItem("user"));
+        if (auth && auth.grpid) {
+            setClickable(false);
+        }
+    }, []); 
+
     const navigate=useNavigate()
     const [projects, setProjects] = useState([])
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -54,16 +63,14 @@ const GroupProject = () => {
             }
         })
         result = await result.json();
-        if (result.result == "Success") {
+        if (result.result == "Success" ) {
             alert("Congratulations")
+            getProjects()
+            closeModal()
         }
         else {
-
             alert(result.message)
         }
-
-
-
 
     }
 
@@ -87,18 +94,25 @@ const GroupProject = () => {
                                     return (
                                         <>
 
-                                            <tr key={index}>
+                                            <tr key={index} className="">
                                                 <td>{count++}</td>
                                                 <td >{item.grp_name}</td>
                                                 <td >{item.grp_title ? item.grp_title : item.grp_mem[0]}</td>
                                                 <td>
                                                     <ol>
                                                         {item.grp_mem.map((mem, idx) => (
-                                                            <li key={idx}>{mem}</li>
+                                                            <li key={idx}>{mem}  {idx==0 ? <span><i>(Leader)</i></span> : <></>}</li>
                                                         ))}
                                                     </ol>
                                                 </td>
-                                                <td> <button className="button is-primary is-small " onClick={() => openModal(item)} >Join</button></td>
+                                                <td>
+                                                {
+                                                    clickable ?  <button className="button is-primary is-small " onClick={() => openModal(item)}  > Join</button>
+                                                    :
+                                                    <button className="button  is-primary is-small " disabled title="multiple group not allowed" > Join</button>
+                                                }
+                                                </td>
+                                                
 
                                             </tr>
 

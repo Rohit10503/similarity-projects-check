@@ -24,7 +24,11 @@ app.post("/signup", async (req, res) => {
         let user = new User(req.body);
         let result = await user.save();
         result = result.toObject();
-        delete result.password, result.cPassword;
+        delete result.password;
+        delete result.cPassword; 
+        // delete result._id
+        delete result.__v
+
         res.send(result);
 
     }
@@ -34,7 +38,7 @@ app.post("/signup", async (req, res) => {
 app.post("/login", async (req, res) => {
     if (req.body.uin && req.body.password) {
 
-        let user = await User.findOne(req.body).select("-password -cPassword");
+        let user = await User.findOne(req.body).select("-password -cPassword -__v ");
         if (user) {
             res.send(user);
         }
@@ -49,24 +53,24 @@ app.post("/login", async (req, res) => {
 
 
 app.post("/create_group", async (req, res) => {         //user_id  grp_name  grp_pass grp_mem[0]
-    if (req.body.grp_name && req.body.grp_pass ) {
+    if (req.body.grp_name && req.body.grp_pass) {
         let new_grp = new Group(req.body);
         let result = await new_grp.save();
         if (result) {
-            
 
-                let update_user_profile = await User.updateOne({
-                    _id: req.body.user_id
-                }
-                    , {
-                        $set: { grpid: result._id }
-                    })
 
-                if (update_user_profile) {
+            let update_user_profile = await User.updateOne({
+                _id: req.body.user_id
+            }
+                , {
+                    $set: { grpid: result._id }
+                })
 
-                    res.send({ "result": "Success" })
-                }
-            
+            if (update_user_profile) {
+
+                res.send({ "result": "Success" ,"grp_id":`${result._id}`})
+            }
+
 
         }
     }
@@ -76,34 +80,42 @@ app.post("/create_group", async (req, res) => {         //user_id  grp_name  grp
 app.post("/join_group", async (req, res) => {           //grp_id   grp_pass  name  user_id
     if (req.body.grp_id && req.body.grp_pass) {
 
+        const groupExists = await Group.findOne({
+            "_id": req.body.grp_id,
+            "grp_pass": req.body.grp_pass
+        });
 
-        let result = await Group.updateOne({
-            "_id": req.body.grp_id, "grp_pass": req.body.grp_pass
-        },
-
-            {
-                $addToSet: { grp_mem: req.body.name }
-            }
-
-        )
-
-        if (result.nModified === 0) {
-            // If no documents were modified, the group might not exist or password might be incorrect
-            return res.status(404).send({ "result": "Error", "message": "Group not found or incorrect password" });
+        if (!groupExists) {
+            return res.status(404).json({ message: "Group password is incorrect." });
         }
+        else {
+            let result = await Group.updateOne({
+                "_id": req.body.grp_id, "grp_pass": req.body.grp_pass
+            },
 
-        if (result) {
+                {
+                    $addToSet: { grp_mem: req.body.name }
+                }
 
-            let update_user_profile = await User.updateOne({
-                _id: req.body.user_id
+            )
+
+            if (result.nModified === 0) {
+                // If no documents were modified, the group might not exist or password might be incorrect
+                return res.send({ "result": "Error", "message": "Group not found or incorrect password" });
             }
-                , {
-                    $set: { grpid: req.body.grp_id }
-                })
+            else {
 
-            if (update_user_profile) {
+                let update_user_profile = await User.updateOne({
+                    _id: req.body.user_id
+                }
+                    , {
+                        $set: { grpid: req.body.grp_id }
+                    })
 
-                res.send({ "result": "Success" })
+                if (update_user_profile) {
+
+                    res.send({ "result": "Success" })
+                }
             }
         }
 
@@ -111,21 +123,21 @@ app.post("/join_group", async (req, res) => {           //grp_id   grp_pass  nam
 })
 
 
-app.get("/disp_prj",async(req,res)=>{
-    let projects= await Group.find()
-    if (projects.length>0){
+app.get("/disp_prj", async (req, res) => {
+    let projects = await Group.find()
+    if (projects.length > 0) {
         res.send(projects)
     }
-    else{
-        res.send({"result":"none"})
+    else {
+        res.send({ "result": "none" })
     }
 
 });
 
 
-app.post("/disp_single",async(req,res)=>{
-    let user_grpid=req.body.grp_id
-    let result= await Group.find({"_id":user_grpid})
+app.post("/disp_single", async (req, res) => {
+    let user_grpid = req.body.grp_id
+    let result = await Group.find({ "_id": user_grpid })
     res.send(result)
 });
 

@@ -1,6 +1,6 @@
 .main_view{
-    overflow: scroll;
-    padding: 1em 0em;
+  
+    padding: 1em 2em;
 }
 table{
     width: 100%;
@@ -21,7 +21,17 @@ tbody{
     padding: 10em;
 }
 
-
+.noclcik_btn{
+    cursor: no-drop;
+}
 .modal{
     display: block;
 }
+
+
+@media screen and (max-width: 480px) {
+    .main_view{
+        overflow: scroll;
+        padding: 1em 0em;
+    }
+  }

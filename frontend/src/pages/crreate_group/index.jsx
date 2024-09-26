@@ -25,9 +25,17 @@ const CreateGroup = () => {
             }
         })
         result=await result.json()
+
         if(result.result=="Success"){
-            alert("Create Ho Gaya group")
+            auth.grpid=result.grp_id
+            let updatedData = JSON.stringify(auth);
+            sessionStorage.setItem('user', updatedData);
+
+
+            alert("Create Ho Gaya group");
+            navigate("/view_groups")
         }
+
         else{
             alert("nahi hua create")
         }

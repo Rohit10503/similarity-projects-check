@@ -8,6 +8,9 @@ const SelfGroup = () => {
 
 
     const getDetail = async () => {
+
+            
+
         if (auth.grpid == "") {
             setShowDetail(null)
         }
@@ -42,12 +45,12 @@ const SelfGroup = () => {
                         <div class="container">
                             <div class=" is-primary">
 
-                                <li><strong>group name</strong> : {showDetail.grp_name} </li>
+                                <li><strong>Group name</strong> : {showDetail.grp_name} </li>
                                 <li><strong>Group Title:</strong> {showDetail.grp_title}</li>
-                                <li><strong>group Meambers :<tb/></strong>{
+                                <li><strong>Group Meambers :<tb/></strong>{
                                     showDetail.grp_mem.map((item, index) => {
                                         return (<>
-                                            <h1 key={index}>{item}</h1>
+                                            <h1 key={index}>{item}   {index==0 ? <span>(Leader)</span> : <></>}  </h1>
                                         </>)
                                     })
                                 }

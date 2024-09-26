@@ -116,6 +116,7 @@ const Home = () => {
                     <br />
                     <p className="Title is-size-5">Enter your project abstract and title below to discover how closely your work aligns with past projects. </p>
                 </div>
+                
             </div>
             <div className="middle box">
                 <textarea class="textarea" placeholder="e.g. Give your project idea here" onChange={(e) => { setPrjIdea(e.target.value) }}></textarea>
