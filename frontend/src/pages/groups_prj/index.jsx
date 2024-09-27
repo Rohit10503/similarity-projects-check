@@ -145,15 +145,15 @@ const GroupProject = () => {
                         <button className="delete" aria-label="close" onClick={closeModal}></button>
                     </header>
                     <section className="modal-card-body">
-                        <h1 className="Title is-size-1">Group Leader is {prjData.grp_mem[0]}</h1>
+                        <h1 className="Title is-size-3">Group Leader is {prjData.grp_mem[0]}</h1>
                         <h1 className="Title is-size-4">Project Title : {prjData.grp_title}</h1>
                         <p>
                             Abstract : {prjData.grp_abstract ? prjData.grp_abstract : "Not yet Declared"}
                         </p>
 
-                        <h1 className="Title is-size-5">Group Members: <ol> {
+                        <h1 className="Title is-size-5">Group Members  : <ol className="grp_name"> {
                             prjData.grp_mem.map((mem, idx) => (
-                                <li key={idx}>{mem}</li>
+                                <li  key={idx}>{mem}</li>
                             ))
                         }</ol></h1>
 

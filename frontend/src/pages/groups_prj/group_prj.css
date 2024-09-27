@@ -25,9 +25,11 @@ tbody{
     cursor: no-drop;
 }
 .modal{
-    display: block;
+    display: flex;
 }
-
+.grp_name{
+    padding-left: 2em;
+}
 
 @media screen and (max-width: 480px) {
     .main_view{
