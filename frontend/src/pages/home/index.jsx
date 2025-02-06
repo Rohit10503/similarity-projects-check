@@ -71,7 +71,7 @@ const Home = () => {
     }, [prjRes]);
 
     const getPrjValid = async () => {
-        let result = await fetch(`https://5000-rohit10503-similaritypr-76vivuscr1y.ws-us117.gitpod.io//similarity`, {
+        let result = await fetch(`https://5000-rohit10503-similaritypr-76vivuscr1y.ws-us117.gitpod.io/similarity`, {
             method: "POST",
             body: JSON.stringify({ sentence: prjIdea }),
             headers: {
