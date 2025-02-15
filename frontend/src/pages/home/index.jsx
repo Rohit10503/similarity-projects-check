@@ -84,15 +84,6 @@ const Home = () => {
 
 
     const getPrjValid = async () => {
-<<<<<<< HEAD
-=======
-        let result = await fetch(`https://5000-rohit10503-similaritypr-76vivuscr1y.ws-us117.gitpod.io/similarity`, {
-            method: "POST",
-            body: JSON.stringify({ sentence: prjIdea }),
-            headers: {
-                "Content-Type": "application/json"
->>>>>>> a2b40c441fbfc9f0e18e08e6b44acdcd5e455133
-
         if (!prjIdea || !prjIdea.trim()) {
             alert("Please enter a project idea.");
             return;

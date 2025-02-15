@@ -163,7 +163,23 @@ app.post("/upload-data",async(req,res)=>{
 
 
 
-
+app.get("/get-student-select", async (req, res) => {
+    
+    // let result = await User.find({ uin: { $regex: uinc, $options: "i" } });
+let result =await User.find()
+    result = result.map(user => {
+        const userObj = user.toObject();  // Convert each document to a plain object
+        delete userObj.password;
+        delete userObj.cPassword;
+        delete userObj.email;
+        delete userObj.grpid;
+        delete userObj.__v;
+        // Optionally, remove _id if not needed
+        // delete userObj._id;
+        return userObj;
+    });
+    res.send(result);
+});
 
 app.listen(3500);
 
