@@ -58,7 +58,7 @@ const SignUp = () => {
                 </div>
 
                 <div class="field">
-                    <label class="label">Username</label>
+                    <label class="label">UIN Id </label>
                     <div class="control has-icons-left has-icons-right">
                         <input class="input is-success" type="text" placeholder="211P*** " value={user.uin} onChange={(e) => setUser({ ...user, uin: e.target.value })} />
                         <span class="icon is-small is-left">
@@ -68,7 +68,7 @@ const SignUp = () => {
                             <i class="fas fa-check"></i>
                         </span>
                     </div>
-                    <p class="help is-success">This username is available</p>
+                    {/* <p class="help is-success">This username is available</p> */}
                 </div>
 
                 <div class="field">
@@ -82,7 +82,7 @@ const SignUp = () => {
                             <i class="fas fa-exclamation-triangle"></i>
                         </span>
                     </div>
-                    <p class="help is-primary">This email is invalid</p>
+                    {/* <p class="help is-primary">This email is invalid</p> */}
                 </div>
 
 

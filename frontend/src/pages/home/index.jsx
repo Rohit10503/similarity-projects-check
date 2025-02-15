@@ -42,18 +42,18 @@ function a11yProps(index) {
 
 const Home = () => {
 
-    // Material ui Starts
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = useState(0);  // Material UI tab state
+    const [prjIdea, setPrjIdea] = useState(null);  // Initialize with null instead of string "null"
+    const [prjRes, setPrjRes] = useState([]);
+    const [department, setDepartment] = useState("");
+    const auth = JSON.parse(sessionStorage.getItem("user"));
+    const navigate = useNavigate();
+
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-    // Material ui Ends
 
-    const auth = JSON.parse(sessionStorage.getItem("user"))
-    const navigate = useNavigate()
-    const [prjIdea, setPrjIdea] = useState("null")
-    const [prjRes, setPrjRes] = useState([])
 
 
     const goToMangeSelf = () => {
@@ -65,26 +65,64 @@ const Home = () => {
         navigate("/view_groups")
     }
 
+
+
+    // Assign department based on UIN
     useEffect(() => {
-        // This will run whenever prjRes changes
-        console.log(prjRes);
-    }, [prjRes]);
+        if (auth && auth.uin) {
+            if (auth.uin.includes("P")) setDepartment("computer");
+            else if (auth.uin.includes("M")) setDepartment("mechanical");
+            else if (auth.uin.includes("C")) setDepartment("civil");
+            else if (auth.uin.includes("E")) setDepartment("electronic");
+            else {
+                alert("Department could not be determined.");
+            }
+        } else {
+            alert("User not authenticated or UIN is missing.");
+        }
+    }, [auth]);
+
 
     const getPrjValid = async () => {
-        let result = await fetch(`https://5000-rohit10503-similaritypr-gom2oz9u3hc.ws-us116.gitpod.io/similarity`, {
-            method: "POST",
-            body: JSON.stringify({ sentence: prjIdea }),
-            headers: {
-                "Content-Type": "application/json"
 
+        if (!prjIdea || !prjIdea.trim()) {
+            alert("Please enter a project idea.");
+            return;
+        }
+
+
+        try {
+            const response = await fetch(
+                `https://5000-rohit10503-similaritypr-76vivuscr1y.ws-us117.gitpod.io/similarity`,
+                {
+                    method: "POST",
+                    body: JSON.stringify({ sentence: prjIdea, branch: department }),
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+
+            if (!response.ok) {
+                alert("Failed to fetch data from the server.");
+                return;
             }
 
-        })
-        result = await result.json()
-        console.log(result)
-        setPrjRes(result)
-        console.log(prjRes)
+            const data = await response.json();
+            setPrjRes(data);  // Set the results from the API
+            console.log(prjRes,department)
+        } catch (error) {
+            console.error("Error fetching data:", error);
+            alert("There was an error while fetching the data.");
+        }
+
+
+        
     }
+
+
+
+
     return <>
 
         <div className="box">
@@ -104,6 +142,8 @@ const Home = () => {
                     </div>
                     <div className="user_school">
                         <h1 className="Title is-size-4">College: Rizvi College Of Engineering</h1>
+
+
                     </div>
 
                     <div className="buttons button_field">
@@ -116,7 +156,7 @@ const Home = () => {
                     <br />
                     <p className="Title is-size-5">Enter your project abstract and title below to discover how closely your work aligns with past projects. </p>
                 </div>
-                
+
             </div>
             <div className="middle box">
                 <textarea class="textarea" placeholder="e.g. Give your project idea here" onChange={(e) => { setPrjIdea(e.target.value) }}></textarea>
@@ -133,20 +173,20 @@ const Home = () => {
 
                                 prjRes.map((item, index) => (
                                     <Tab
-                                    key={index}
-                                    label={`${(item.score*100).toFixed(2) } %`}
-                                    {...a11yProps(index)} 
-                                />
-                                ))} 
-                            
+                                        key={index}
+                                        label={`${(item.score * 100).toFixed(2)} %`}
+                                        {...a11yProps(index)}
+                                    />
+                                ))}
+
                         </Tabs>
                     </Box>
                     {prjRes.map((item, index) => (
                         <CustomTabPanel value={value} index={index} key={index}>
-                            <h4>{item.sentence}</h4>
+                            <h4>{item.id } ----  { item.sentence}</h4>
                         </CustomTabPanel>
                     ))}
-                    
+
 
                 </Box>
 
@@ -158,4 +198,6 @@ const Home = () => {
     </>
 }
 export default Home;
+
+
 

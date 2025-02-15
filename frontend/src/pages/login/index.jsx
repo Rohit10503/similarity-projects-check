@@ -3,15 +3,18 @@ import "./login.css"
 import { Link, useNavigate } from "react-router-dom";
 import { Base_URL } from "../../Services/helper";
 
+import Toastart from "../../component/toast";
+
 
 const Login = () => {
 
   const navigate=useNavigate()
+  
+
   const [user, setUser] = useState({
     uin: "",
     password: ""
   });
-
 
   const collectData = async () => {
     const { uin, password } = user;
@@ -27,14 +30,20 @@ const Login = () => {
     result = await result.json();
     if (result.name) {
       sessionStorage.setItem("user", JSON.stringify(result));
+      
       navigate("/")
       alert((result.name) + " Welcome")
+    
+     
+      
+      
     } else {
       alert("Invalid Credentials!");
     }
   }
 
   return <>
+
     <div className="login-box">
       <div className="form">
         <div class="field">

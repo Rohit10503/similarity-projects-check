@@ -11,7 +11,7 @@ require("./db/config");
 //Importing schemas
 const User = require("./db/userSchema")
 const Group = require("./db/groupSchema");
-
+const Projects=require("./db/prjdataSchema")
 
 
 
@@ -142,6 +142,24 @@ app.post("/disp_single", async (req, res) => {
 });
 
 
+
+
+// ---------------------------Now prj datas push into db----------------------
+app.post("/upload-data",async(req,res)=>{
+    try {
+        const data = req.body.data;
+
+        // Insert the data into MongoDB
+        await Projects.insertMany(data);
+
+        res.status(200).send('Data successfully uploaded to the database.');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error uploading data to the database.');
+    }
+    
+    
+})
 
 
 

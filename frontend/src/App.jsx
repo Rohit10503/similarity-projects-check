@@ -10,6 +10,7 @@ import GroupProject from './pages/groups_prj'
 import PrivateComponent from './Services/privateComponents'
 import SelfGroup from './pages/self_group'
 import Footer from './component/footer'
+import Adashboard from './pages/Admin/dashboard'
 
 function App() {
 
@@ -25,6 +26,8 @@ function App() {
       <Route path="/create_group" element={<CreateGroup/>}/>
       <Route path="/view_groups" element={<GroupProject/>}/>
       <Route path='/self_group' element={<SelfGroup/>}/>
+      {/* Admin hai  */}
+      <Route path="/adashboard" element={<Adashboard/>}/>
       </Route>
 
 
