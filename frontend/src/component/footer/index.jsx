@@ -8,7 +8,7 @@ const Footer=()=>{
     }
     return<>
     <div className="footer-main">
-        <h1 onClick={goToAdmin()} className="title   ">Developed and Maintained by Group 4 </h1>
+        <h1 onClick={goToAdmin} className="title   ">Developed and Maintained by Group 4 </h1>
         
     </div>
     </> 
